@@ -185,7 +185,7 @@ h2 { font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacin
             {% if u.role == "superadmin" %}
               <span style="color:#00AFF0;">Vše</span>
             {% else %}
-              {% set perm_keys = perm_map.get(u.id, set()) %}
+              {% set perm_keys = perm_map.get(u.id, []) %}
               {% if perm_keys %}{{ perm_keys|join(", ") }}{% else %}<span style="color:rgba(255,255,255,0.25);">žádné</span>{% endif %}
             {% endif %}
           </td>
