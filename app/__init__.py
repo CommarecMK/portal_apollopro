@@ -1,4 +1,4 @@
-"""Portal app — přihlášení a rozcestník pro apollopro.io"""
+"""app/__init__.py — Portal factory."""
 import os
 from flask import Flask
 from .extensions import db
@@ -20,5 +20,9 @@ def create_app():
 
     from .routes.main import bp
     app.register_blueprint(bp)
+
+    with app.app_context():
+        from .models import PortalAppPermission
+        db.create_all()
 
     return app

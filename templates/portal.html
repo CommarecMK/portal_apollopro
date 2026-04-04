@@ -1,211 +1,144 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rozcestník — Superskladník</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portál — Apollo Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Montserrat', sans-serif; min-height: 100vh; background: #0E213E; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+.bg { position: fixed; inset: 0; background: #0E213E; z-index: 0; }
+.bg-orb { position: absolute; border-radius: 50%; filter: blur(80px); }
+.bg-orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(23,55,103,0.9) 0%, transparent 70%); top: -200px; left: -150px; }
+.bg-orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(37,79,138,0.6) 0%, transparent 70%); bottom: -100px; right: -100px; }
+.obsah { position: relative; z-index: 10; width: 100%; max-width: 760px; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0f1117;
-      color: #e8e8e8;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
+.hlavicka { text-align: center; margin-bottom: 2.5rem; }
 
-    .hlavicka {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
+/* Apollo Pro nadpis */
+.apollo-nazev {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
 
-    .logo {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #888;
-      margin-bottom: 0.75rem;
-    }
+/* by Commarec s logem */
+.by-commarec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.by-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.commarec-logo {
+  height: 16px;
+  width: auto;
+  opacity: 0.4;
+}
 
-    .pozdrav {
-      font-size: 2rem;
-      font-weight: 300;
-      color: #f0f0f0;
-    }
+/* Pozdrav */
+.pozdrav {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.pozdrav span { color: #00AFF0; }
 
-    .pozdrav span {
-      font-weight: 600;
-      color: #fff;
-    }
+/* Dlaždice */
+.mrizka { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.dlazdicova-karta {
+  display: block; text-decoration: none;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 1.75rem;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.dlazdicova-karta:hover { background: rgba(255,255,255,0.09); border-color: rgba(0,175,240,0.4); transform: translateY(-2px); }
+.ikona-obal { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.ikona-svg { width: 22px; height: 22px; }
+.nazev-app { font-size: 1rem; font-weight: 900; color: #fff; margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.popis-app { font-size: 0.78rem; color: rgba(255,255,255,0.4); font-weight: 500; }
+.sipka { margin-top: 1.25rem; font-size: 0.72rem; font-weight: 700; color: #00AFF0; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0; transition: opacity 0.15s; }
+.dlazdicova-karta:hover .sipka { opacity: 1; }
 
-    /* Mřížka dlaždic */
-    .dlazdicove-pole {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
-      width: 100%;
-      max-width: 720px;
-    }
-
-    .dlazdicova-karta {
-      display: block;
-      text-decoration: none;
-      background: #1a1d27;
-      border: 1px solid #2a2d3a;
-      border-radius: 16px;
-      padding: 2rem;
-      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-      cursor: pointer;
-    }
-
-    .dlazdicova-karta:hover {
-      transform: translateY(-3px);
-      border-color: #3a3d50;
-      background: #1e2133;
-    }
-
-    .dlazdicova-karta:active {
-      transform: translateY(0);
-    }
-
-    /* Ikona dlaždice */
-    .ikona-obal {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.25rem;
-      font-size: 1.5rem;
-    }
-
-    .ikona-obal.modra  { background: rgba(59, 130, 246, 0.15); }
-    .ikona-obal.zelena { background: rgba(34, 197, 94, 0.12); }
-    .ikona-obal.oranzova { background: rgba(249, 115, 22, 0.12); }
-    .ikona-obal.fialova { background: rgba(168, 85, 247, 0.12); }
-
-    /* SVG ikony */
-    .ikona-svg {
-      width: 26px;
-      height: 26px;
-    }
-    .modra  .ikona-svg { color: #3b82f6; }
-    .zelena .ikona-svg { color: #22c55e; }
-    .oranzova .ikona-svg { color: #f97316; }
-    .fialova .ikona-svg { color: #a855f7; }
-
-    .nazev-aplikace {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #f0f0f0;
-      margin-bottom: 0.4rem;
-    }
-
-    .popis-aplikace {
-      font-size: 0.85rem;
-      color: #666;
-      line-height: 1.5;
-    }
-
-    .sipka {
-      margin-top: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-      font-weight: 500;
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
-    .modra  .sipka { color: #3b82f6; }
-    .zelena .sipka { color: #22c55e; }
-    .oranzova .sipka { color: #f97316; }
-    .fialova .sipka { color: #a855f7; }
-
-    .dlazdicova-karta:hover .sipka { opacity: 1; }
-
-    /* Patička */
-    .paticka {
-      margin-top: 3rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-size: 0.8rem;
-      color: #444;
-    }
-
-    .paticka a {
-      color: #555;
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .paticka a:hover { color: #888; }
-
-    .oddelovac { color: #2a2d3a; }
-  </style>
+/* Patička */
+.paticka { position: relative; z-index: 10; margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; font-size: 0.7rem; color: rgba(255,255,255,0.25); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.paticka a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.15s; }
+.paticka a:hover { color: #00AFF0; }
+.btn-admin { background: rgba(0,175,240,0.12); border: 1px solid rgba(0,175,240,0.25); color: #00AFF0; padding: 0.35rem 0.9rem; border-radius: 4px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: background 0.15s; }
+.btn-admin:hover { background: rgba(0,175,240,0.22); color: #00AFF0; }
+.prazdne { text-align: center; padding: 3rem; color: rgba(255,255,255,0.3); font-size: 0.85rem; }
+</style>
 </head>
 <body>
+<div class="bg">
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+</div>
 
+<div class="obsah">
   <div class="hlavicka">
-    <div class="logo">Superskladník</div>
+    <div class="apollo-nazev">Apollo Pro</div>
+    <div class="by-commarec">
+      <span class="by-text">by</span>
+      <img src="/static/logo-white.svg" alt="Commarec" class="commarec-logo">
+    </div>
     <div class="pozdrav">Vítej, <span>{{ current_user.name }}</span></div>
   </div>
 
-  <div class="dlazdicove-pole">
+  {% if aplikace %}
+  <div class="mrizka">
     {% for app in aplikace %}
     <a href="{{ app.url }}" class="dlazdicova-karta">
-
-      <div class="ikona-obal {{ app.barva }}">
+      <div class="ikona-obal" style="background: {{ app.barva }}22;">
         {% if app.ikona == "crm" %}
-        <!-- Ikona CRM: stavební bloky / briefcase -->
-        <svg class="ikona-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+        <svg class="ikona-svg" fill="none" viewBox="0 0 24 24" stroke="{{ app.barva }}" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
         </svg>
-        {% elif app.ikona == "kb" %}
-        <!-- Ikona KB: kniha / databáze -->
-        <svg class="ikona-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        {% elif app.ikona == "brain" %}
+        <svg class="ikona-svg" fill="none" viewBox="0 0 24 24" stroke="{{ app.barva }}" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
         </svg>
         {% else %}
-        <!-- Výchozí ikona -->
-        <svg class="ikona-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M4 6h16M4 12h16M4 18h16"/>
+        <svg class="ikona-svg" fill="none" viewBox="0 0 24 24" stroke="{{ app.barva }}" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
         {% endif %}
       </div>
-
-      <div class="nazev-aplikace">{{ app.nazev }}</div>
-      <div class="popis-aplikace">{{ app.popis }}</div>
-
-      <div class="sipka {{ app.barva }}">
-        Otevřít aplikaci
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-        </svg>
-      </div>
-
+      <div class="nazev-app">{{ app.nazev }}</div>
+      <div class="popis-app">{{ app.popis }}</div>
+      <div class="sipka">Otevřít →</div>
     </a>
     {% endfor %}
   </div>
+  {% else %}
+  <div class="prazdne">Nemáte přístup k žádné aplikaci. Kontaktujte administrátora.</div>
+  {% endif %}
+</div>
 
-  <div class="paticka">
-    <span>{{ current_user.email }}</span>
-    <span class="oddelovac">·</span>
-    <a href="{{ url_for('main.logout') }}">Odhlásit se</a>
-  </div>
-
+<div class="paticka">
+  <span>{{ current_user.email }}</span>
+  {% if je_admin %}
+  <a href="{{ url_for('main.admin') }}" class="btn-admin">⚙ Admin</a>
+  {% endif %}
+  <a href="{{ url_for('main.logout') }}">Odhlásit se</a>
+</div>
 </body>
 </html>
