@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Přihlášení — Apollo Pro</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1117; color: #e8e8e8; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+    .karta { background: #1a1d27; border: 1px solid #2a2d3a; border-radius: 20px; padding: 2.5rem; width: 100%; max-width: 400px; }
+    .logo { text-align: center; margin-bottom: 2rem; }
+    .logo-text { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em; color: #fff; }
+    .logo-sub { font-size: 0.8rem; color: #555; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.25rem; }
+    .nadpis { font-size: 1.1rem; font-weight: 500; color: #c0c0c0; margin-bottom: 1.5rem; text-align: center; }
+    .pole { margin-bottom: 1rem; }
+    label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 0.4rem; }
+    input[type="email"], input[type="password"] { width: 100%; background: #0f1117; border: 1px solid #2a2d3a; border-radius: 10px; padding: 0.75rem 1rem; color: #e8e8e8; font-size: 0.95rem; outline: none; transition: border-color 0.15s; }
+    input:focus { border-color: #3b82f6; }
+    .btn { width: 100%; background: #3b82f6; color: #fff; border: none; border-radius: 10px; padding: 0.85rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: background 0.15s; }
+    .btn:hover { background: #2563eb; }
+    .chyba { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.85rem; color: #f87171; margin-bottom: 1rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="karta">
+    <div class="logo">
+      <div class="logo-text">Apollo Pro</div>
+      <div class="logo-sub">Firemní portál</div>
+    </div>
+    <div class="nadpis">Přihlaste se ke svému účtu</div>
+    {% if error %}<div class="chyba">{{ error }}</div>{% endif %}
+    <form method="POST">
+      <div class="pole">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="vas@email.cz" required autofocus>
+      </div>
+      <div class="pole">
+        <label for="password">Heslo</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn">Přihlásit se &rarr;</button>
+    </form>
+  </div>
+</body>
+</html>
