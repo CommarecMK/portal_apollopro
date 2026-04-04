@@ -201,6 +201,19 @@ def uzivatel_aktivovat(user_id):
     return redirect(url_for("main.admin"))
 
 
+
+@bp.route("/admin/uzivatel/<int:user_id>/heslo", methods=["POST"])
+@admin_required
+def uzivatel_heslo(user_id):
+    """Nastaví nové heslo uživateli."""
+    user = User.query.get_or_404(user_id)
+    nove_heslo = request.form.get("heslo", "").strip()
+    if len(nove_heslo) >= 6:
+        user.password_hash = generate_password_hash(nove_heslo)
+        db.session.commit()
+    return redirect(url_for("main.admin"))
+
+
 @bp.route("/health")
 def health():
     return jsonify({"status": "ok"})

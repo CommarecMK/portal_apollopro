@@ -155,6 +155,7 @@ h2 { font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacin
           <th>Role</th>
           <th>Přístup k aplikacím</th>
           <th>Uložit</th>
+          <th>Nové heslo</th>
           <th>Stav</th>
         </tr>
       </thead>
@@ -200,6 +201,16 @@ h2 { font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacin
             {% if u.id != current_user.id %}
               <button type="submit" form="form_{{ u.id }}" class="btn btn-primary btn-sm">Uložit</button>
               </form>
+            {% endif %}
+          </td>
+          <td>
+            {% if u.id != current_user.id %}
+            <form method="POST" action="{{ url_for('main.uzivatel_heslo', user_id=u.id) }}" style="display:flex;gap:0.4rem;align-items:center;">
+              <input type="text" name="heslo" placeholder="Nové heslo"
+                style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:5px 8px;font-family:'Montserrat',sans-serif;font-size:11px;color:#fff;outline:none;width:130px;"
+                minlength="6">
+              <button type="submit" class="btn btn-sm" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.12);">Nastavit</button>
+            </form>
             {% endif %}
           </td>
           <td>
