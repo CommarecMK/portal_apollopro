@@ -145,11 +145,34 @@ def uzivatel_opravneni(user_id):
     user = User.query.get_or_404(user_id)
     vybrane_keys = request.form.getlist("app_keys")
     nova_role = request.form.get("role", user.role)
+    
+    # Stav účtu
+    is_active = request.form.get("is_active", "")
+    if user.id != session["user_id"]:
+        user.is_active = bool(is_active)
+    
+    # Nové heslo (z modal formuláře)
+    nove_heslo = request.form.get("heslo_zmena", "").strip()
+    if nove_heslo and len(nove_heslo) >= 6:
+        from werkzeug.security import generate_password_hash as gph
+        user.password_hash = gph(nove_heslo)
 
     # Ulož roli (superadmin nemůže měnit sám sobě roli)
     if user.id != session["user_id"]:
         user.role = nova_role
         user.is_admin = nova_role in ("admin", "superadmin")
+
+    # Ulož Freelo credentials
+    freelo_email = request.form.get("freelo_email", "").strip()
+    freelo_api_key = request.form.get("freelo_api_key", "").strip()
+    if freelo_email:
+        user.freelo_email = freelo_email
+    elif request.form.get("clear_freelo_email"):
+        user.freelo_email = None
+    if freelo_api_key and freelo_api_key != "••••••••":
+        user.freelo_api_key = freelo_api_key
+    elif request.form.get("clear_freelo_key"):
+        user.freelo_api_key = None
 
     # Smaž stará oprávnění
     PortalAppPermission.query.filter_by(user_id=user_id).delete()
