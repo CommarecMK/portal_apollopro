@@ -4,322 +4,276 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — Apollo Pro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Montserrat', sans-serif; min-height: 100vh; background: #0E213E; color: #fff; }
-.bg { position: fixed; inset: 0; background: #0E213E; z-index: 0; }
-.bg-orb { position: absolute; border-radius: 50%; filter: blur(80px); }
-.bg-orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(23,55,103,0.9) 0%, transparent 70%); top: -200px; left: -150px; }
-.obsah { position: relative; z-index: 10; max-width: 900px; margin: 0 auto; padding: 2rem; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Montserrat',sans-serif;min-height:100vh;background:#0E213E;color:#fff;}
+.bg{position:fixed;inset:0;background:#0E213E;z-index:0;}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(80px);}
+.bg-orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(23,55,103,0.9) 0%,transparent 70%);top:-150px;left:-100px;}
+.bg-orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(37,79,138,0.5) 0%,transparent 70%);bottom:-100px;right:-100px;}
+.wrap{position:relative;z-index:10;max-width:1000px;margin:0 auto;padding:2rem;}
 
 /* Nav */
-.nav { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.nav-logo { font-size: 13px; font-weight: 900; color: #00AFF0; letter-spacing: 0.15em; text-transform: uppercase; }
-.nav-sep { color: rgba(255,255,255,0.2); }
-.nav-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 0.05em; text-transform: uppercase; }
-.nav-back { margin-left: auto; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; }
-.nav-back:hover { color: #00AFF0; }
+.nav{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-logo{font-size:12px;font-weight:900;color:#00AFF0;letter-spacing:.2em;text-transform:uppercase;}
+.nav-dot{color:rgba(255,255,255,0.2);}
+.nav-title{font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:.08em;text-transform:uppercase;}
+.nav-back{margin-left:auto;font-size:11px;font-weight:700;color:rgba(255,255,255,0.35);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .15s;}
+.nav-back:hover{color:#00AFF0;}
 
 /* Sekce */
-h2 { font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; margin-bottom: 1rem; }
-.sekce { margin-bottom: 2.5rem; }
-.sekce-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-
-/* Role info */
-.role-info { background: rgba(0,175,240,0.06); border: 1px solid rgba(0,175,240,0.15); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
-.role-info-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #00AFF0; margin-bottom: 0.75rem; }
-.role-tabulka { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; }
-.role-polozka .role-nazev { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem; }
-.role-polozka .role-popis { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
-.r-superadmin { color: #00AFF0; }
-.r-admin { color: #c084fc; }
-.r-konzultant { color: #4ade80; }
-.r-obchodnik { color: #fbbf24; }
-.r-junior { color: rgba(255,255,255,0.6); }
-
-/* Tabulka */
-.tabulka { width: 100%; border-collapse: collapse; }
-.tabulka th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); padding: 0.6rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; }
-.tabulka td { padding: 0.85rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; vertical-align: middle; }
-.tabulka tr:hover td { background: rgba(255,255,255,0.02); }
-.neaktivni td { opacity: 0.4; }
-.badge { display: inline-block; padding: 2px 9px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-.badge-superadmin { background: rgba(0,175,240,0.2); color: #00AFF0; }
-.badge-admin { background: rgba(168,85,247,0.2); color: #c084fc; }
-.badge-konzultant { background: rgba(74,222,128,0.15); color: #4ade80; }
-.badge-obchodnik { background: rgba(251,191,36,0.15); color: #fbbf24; }
-.badge-junior { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+.sekce{margin-bottom:2.5rem;}
+.sekce-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
+.sekce-title{font-size:.85rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,0.5);}
 
 /* Buttons */
-.btn { padding: 7px 16px; border: none; border-radius: 5px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
-.btn-primary { background: #00AFF0; color: #0E213E; }
-.btn-primary:hover { background: #008ABD; }
-.btn-secondary { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.12); }
-.btn-secondary:hover { background: rgba(255,255,255,0.12); }
-.btn-danger { background: rgba(192,57,43,0.25); color: #ff8a7a; border: 1px solid rgba(192,57,43,0.3); }
-.btn-sm { padding: 5px 12px; font-size: 10px; }
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:7px 16px;border:none;border-radius:5px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+.btn-primary{background:#00AFF0;color:#0E213E;}
+.btn-primary:hover{background:#009fd8;}
+.btn-ghost{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.75);border:1px solid rgba(255,255,255,0.1);}
+.btn-ghost:hover{background:rgba(255,255,255,0.11);}
+.btn-sm{padding:5px 12px;font-size:10px;}
+
+/* User cards */
+.user-grid{display:flex;flex-direction:column;gap:.5rem;}
+.user-row{display:grid;grid-template-columns:1fr 1.4fr auto auto auto;align-items:center;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:.9rem 1.25rem;transition:background .15s;}
+.user-row:hover{background:rgba(255,255,255,0.06);}
+.user-row.neaktivni{opacity:.4;}
+.user-name{font-size:.9rem;font-weight:700;color:#fff;}
+.user-email{font-size:.75rem;color:rgba(255,255,255,0.4);margin-top:2px;font-weight:500;}
+.role-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;}
+.r-superadmin{background:rgba(0,175,240,0.15);color:#00AFF0;border:1px solid rgba(0,175,240,0.25);}
+.r-admin{background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.25);}
+.r-konzultant{background:rgba(74,222,128,0.12);color:#4ade80;border:1px solid rgba(74,222,128,0.2);}
+.r-obchodnik{background:rgba(251,191,36,0.12);color:#fbbf24;border:1px solid rgba(251,191,36,0.2);}
+.r-junior{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.1);}
+.user-apps{font-size:11px;color:rgba(255,255,255,0.4);font-weight:500;}
+.user-apps span{color:#00AFF0;}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;}
+.dot-green{background:#4ade80;}
+.dot-gray{background:rgba(255,255,255,0.2);}
 
 /* Modal */
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(5,11,25,0.75); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-.modal-overlay.open { display: flex; }
-.modal-box { background: #0E213E; border: 1px solid rgba(255,255,255,0.12); border-top: 3px solid #00AFF0; border-radius: 8px; padding: 2rem; width: 520px; max-width: calc(100vw - 2rem); max-height: 90vh; overflow-y: auto; }
-.modal-title { font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; margin-bottom: 1.5rem; }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
-.form-field { display: flex; flex-direction: column; gap: 4px; }
-.form-field.full { grid-column: 1 / -1; }
-.form-field label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); }
-.form-field input, .form-field select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 5px; padding: 9px 12px; font-family: 'Montserrat', sans-serif; font-size: 13px; color: #fff; outline: none; transition: border-color 0.15s; }
-.form-field input:focus, .form-field select:focus { border-color: #00AFF0; }
-.form-field input:disabled { opacity: 0.5; cursor: not-allowed; }
-.form-field select option { background: #0E213E; }
-.role-desc-box { background: rgba(0,175,240,0.06); border: 1px solid rgba(0,175,240,0.15); border-radius: 5px; padding: 8px 12px; font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 0.75rem; min-height: 36px; }
-.sekce-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); padding: 0.75rem 0 0.5rem; border-top: 1px solid rgba(255,255,255,0.07); margin-top: 0.5rem; }
-.app-checkboxy { display: flex; gap: 1rem; flex-wrap: wrap; padding: 0.5rem 0; }
-.app-check { display: flex; align-items: center; gap: 6px; }
-.app-check input[type=checkbox] { accent-color: #00AFF0; width: 15px; height: 15px; cursor: pointer; }
-.app-check label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); cursor: pointer; }
-.modal-foot { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); }
-.freelo-status { font-size: 11px; color: #4ade80; margin-top: 3px; }
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(5,11,25,.8);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.modal-overlay.open{display:flex;}
+.modal{background:#0d1e38;border:1px solid rgba(255,255,255,0.1);border-top:3px solid #00AFF0;border-radius:10px;padding:2rem;width:500px;max-width:calc(100vw - 2rem);max-height:90vh;overflow-y:auto;}
+.modal-title{font-size:15px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.5rem;}
+.field{margin-bottom:.875rem;}
+.field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.35);margin-bottom:5px;}
+.field input,.field select{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:9px 12px;font-family:'Montserrat',sans-serif;font-size:13px;color:#fff;outline:none;transition:border-color .15s;}
+.field input:focus,.field select:focus{border-color:#00AFF0;}
+.field input:disabled{opacity:.4;cursor:not-allowed;}
+.field select option{background:#0d1e38;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.role-hint{background:rgba(0,175,240,0.06);border:1px solid rgba(0,175,240,0.12);border-radius:5px;padding:8px 11px;font-size:11px;color:rgba(255,255,255,0.5);line-height:1.55;min-height:34px;margin-bottom:.875rem;}
+.divider{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.2);border-top:1px solid rgba(255,255,255,0.06);padding-top:.75rem;margin:.875rem 0 .75rem;}
+.app-checks{display:flex;gap:1rem;flex-wrap:wrap;padding:.25rem 0;}
+.app-check{display:flex;align-items:center;gap:6px;cursor:pointer;}
+.app-check input{accent-color:#00AFF0;width:14px;height:14px;}
+.app-check span{font-size:12px;font-weight:600;color:rgba(255,255,255,0.65);}
+.modal-foot{display:flex;gap:.75rem;justify-content:flex-end;margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07);}
+.freelo-ok{font-size:11px;color:#4ade80;margin-top:3px;}
+
+/* Oprávnění */
+.perms-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;overflow:hidden;}
+.perms-table{width:100%;border-collapse:collapse;}
+.perms-table th{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.3);padding:.6rem .75rem;text-align:center;border-bottom:1px solid rgba(255,255,255,0.07);}
+.perms-table th:first-child{text-align:left;padding-left:1.25rem;}
+.perms-table td{padding:.55rem .75rem;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;font-weight:500;color:rgba(255,255,255,0.65);text-align:center;white-space:nowrap;}
+.perms-table td:first-child{text-align:left;padding-left:1.25rem;color:rgba(255,255,255,0.7);font-weight:600;}
+.perms-table tr:last-child td{border-bottom:none;}
+.perms-table tr:hover td{background:rgba(255,255,255,0.02);}
+.perms-group td:first-child{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.25);padding-top:.9rem;background:transparent;}
+.ok{color:#4ade80;font-size:14px;}
+.no{color:rgba(255,255,255,0.12);font-size:14px;}
+.txt{font-size:10px;color:rgba(255,255,255,0.35);font-weight:600;}
 </style>
 </head>
 <body>
-<div class="bg"><div class="bg-orb bg-orb-1"></div></div>
-<div class="obsah">
+<div class="bg"><div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div></div>
+<div class="wrap">
 
-  <div class="nav">
-    <div class="nav-logo">Apollo Pro</div>
-    <div class="nav-sep">·</div>
-    <div class="nav-title">Správa uživatelů</div>
-    <a href="{{ url_for('main.portal') }}" class="nav-back">← Zpět na portál</a>
+<nav class="nav">
+  <div class="nav-logo">Apollo Pro</div>
+  <div class="nav-dot">·</div>
+  <div class="nav-title">Správa</div>
+  <a href="{{ url_for('main.portal') }}" class="nav-back">← Portál</a>
+</nav>
+
+<!-- UŽIVATELÉ -->
+<div class="sekce">
+  <div class="sekce-head">
+    <div class="sekce-title">Uživatelé ({{ uzivatele|length }})</div>
+    <button class="btn btn-primary btn-sm" onclick="openPridat()">+ Přidat</button>
   </div>
-
-  <!-- Přehled rolí -->
-  <div class="role-info">
-    <div class="role-info-title">Přehled rolí — co kdo smí v CRM</div>
-    <div class="role-tabulka">
-      <div class="role-polozka"><div class="role-nazev r-superadmin">Superadmin</div><div class="role-popis">Vše bez omezení, správa šablon a uživatelů</div></div>
-      <div class="role-polozka"><div class="role-nazev r-admin">Admin</div><div class="role-popis">Editace zápisů všech, klienti, nabídky, Freelo, reporty</div></div>
-      <div class="role-polozka"><div class="role-nazev r-konzultant">Konzultant</div><div class="role-popis">Vlastní zápisy, správa klientů, odesílání do Freela</div></div>
-      <div class="role-polozka"><div class="role-nazev r-obchodnik">Obchodník</div><div class="role-popis">Nabídky a přehled klientů — bez zápisů ze schůzek</div></div>
-      <div class="role-polozka"><div class="role-nazev r-junior">Junior</div><div class="role-popis">Jen vlastní zápisy, přidělení klienti</div></div>
+  <div class="user-grid">
+    {% for u in uzivatele %}
+    <div class="user-row {{ 'neaktivni' if not u.is_active }}">
+      <div>
+        <div class="user-name">{{ u.name }}</div>
+        <div class="user-email">{{ u.email }}</div>
+      </div>
+      <div>
+        <span class="role-pill r-{{ u.role if u.role in ['superadmin','admin','konzultant','obchodnik','junior'] else 'junior' }}">
+          {{ {'superadmin':'👑 Superadmin','admin':'⚡ Admin','konzultant':'🟢 Konzultant','obchodnik':'🔵 Obchodník','junior':'🟠 Junior'}.get(u.role, u.role) }}
+        </span>
+      </div>
+      <div class="user-apps">
+        {% if u.role == 'superadmin' %}<span>Vše</span>
+        {% else %}
+          {% set pk = perm_map.get(u.id, []) %}
+          {% if pk %}{{ pk|join(', ') }}{% else %}<span style="color:rgba(255,255,255,0.2);">—</span>{% endif %}
+        {% endif %}
+      </div>
+      <div>
+        <span class="status-dot {{ 'dot-green' if u.is_active else 'dot-gray' }}"></span>
+        <span style="font-size:11px;font-weight:600;color:{{ '#4ade80' if u.is_active else 'rgba(255,255,255,0.3)' }};">
+          {{ 'Aktivní' if u.is_active else 'Neaktivní' }}
+        </span>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="openUpravit(
+        {{ u.id }},'{{ u.name|replace("'","\\'") }}','{{ u.email }}','{{ u.role }}',
+        {{ u.is_active|lower }},'{{ u.freelo_email or '' }}',{{ 'true' if u.freelo_api_key else 'false' }},
+        [{% for app in vsechny_apps %}{% if u.id in perm_map and app.key in perm_map[u.id] %}'{{ app.key }}'{% if not loop.last and u.id in perm_map and app.key in perm_map[u.id] %},{% endif %}{% endif %}{% endfor %}]
+      )">Upravit</button>
     </div>
+    {% endfor %}
   </div>
+</div>
 
-
-  <!-- Přehled oprávnění -->
-  <div class="sekce">
-    <h2>Přehled oprávnění</h2>
-    <div style="overflow-x:auto;">
-    <table class="tabulka" style="min-width:640px;">
+<!-- OPRÁVNĚNÍ -->
+<div class="sekce">
+  <div class="sekce-head">
+    <div class="sekce-title">Přehled oprávnění</div>
+  </div>
+  <div class="perms-card">
+    <table class="perms-table">
       <thead>
         <tr>
-          <th style="min-width:180px;">Funkce</th>
-          <th style="text-align:center;">🟠 Junior</th>
-          <th style="text-align:center;">🟢 Konzultant</th>
-          <th style="text-align:center;">🔵 Obchodník</th>
-          <th style="text-align:center;">⚡ Admin</th>
-          <th style="text-align:center;">👑 Superadmin</th>
-          <th style="text-align:center;">⚪ Klient</th>
+          <th>Funkce</th>
+          <th>🟠<br>Junior</th>
+          <th>🟢<br>Konzultant</th>
+          <th>🔵<br>Obchodník</th>
+          <th>⚡<br>Admin</th>
+          <th>👑<br>Superadmin</th>
+          <th>⚪<br>Klient</th>
         </tr>
       </thead>
       <tbody>
-      {% for label, vals in [
-        ("Vytvořit zápis",           ["✅","✅","❌","✅","✅","❌"]),
-        ("Editovat svůj zápis",      ["✅","✅","❌","✅","✅","❌"]),
-        ("Editovat cizí zápis",      ["❌","❌","❌","✅","✅","❌"]),
-        ("Smazat zápis",             ["❌","❌","❌","✅","✅","❌"]),
-        ("Vidět klienty",            ["přiřazené","všechny","všechny","všechny","všechny","jen sebe"]),
-        ("Přidat/editovat klienta",  ["✅","✅","✅","✅","✅","❌"]),
-        ("Smazat klienta",           ["❌","❌","❌","❌","✅","❌"]),
-        ("Nabídky — vytvořit",       ["❌","❌","✅","✅","✅","❌"]),
-        ("Nabídky — číst",           ["❌","❌","✅","✅","✅","✅"]),
-        ("Odeslat do Freela",        ["❌","✅","❌","✅","✅","❌"]),
-        ("Nastavit Freelo projekt",  ["❌","❌","❌","✅","✅","❌"]),
-        ("Správa uživatelů",         ["❌","❌","❌","❌","✅","❌"]),
-        ("Editace AI šablon",        ["❌","❌","❌","❌","✅","❌"]),
-        ("Klientský portál",         ["❌","❌","❌","❌","❌","✅"]),
-      ] %}
-      <tr>
-        <td style="font-weight:600;font-size:12px;">{{ label }}</td>
-        {% for v in vals %}
-        <td style="text-align:center;
-          {% if v == "✅" %}font-size:15px;color:#4ade80;
-          {% elif v == "❌" %}font-size:15px;color:rgba(255,255,255,0.15);
-          {% else %}font-size:10px;font-weight:600;color:rgba(255,255,255,0.4);{% endif %}">
-          {{ v }}
-        </td>
-        {% endfor %}
-      </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
-  </div>
+        <tr class="perms-group"><td colspan="7">Zápisy ze schůzek</td></tr>
+        {% for label,vals in [
+          ("Vytvořit zápis",      ["ok","ok","no","ok","ok","no"]),
+          ("Editovat vlastní",    ["ok","ok","no","ok","ok","no"]),
+          ("Editovat cizí",       ["no","no","no","ok","ok","no"]),
+          ("Smazat zápis",        ["no","no","no","ok","ok","no"]),
+        ]%}<tr><td>{{label}}</td>{% for v in vals %}<td class="{{v}}">{% if v=="ok" %}✓{% elif v=="no" %}—{% else %}<span class="txt">{{v}}</span>{% endif %}</td>{% endfor %}</tr>{% endfor %}
 
-  <!-- Uživatelé -->
-  <div class="sekce">
-    <div class="sekce-head">
-      <h2>Uživatelé ({{ uzivatele|length }})</h2>
-      <button class="btn btn-primary" onclick="openPridat()">+ Přidat uživatele</button>
-    </div>
-    <table class="tabulka">
-      <thead>
-        <tr>
-          <th>Jméno</th>
-          <th>E-mail</th>
-          <th>Role</th>
-          <th>Aplikace</th>
-          <th>Stav</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for u in uzivatele %}
-        <tr class="{{ 'neaktivni' if not u.is_active else '' }}">
-          <td><strong>{{ u.name }}</strong></td>
-          <td style="font-size:12px;color:rgba(255,255,255,0.5);">{{ u.email }}</td>
-          <td><span class="badge badge-{{ u.role if u.role in ['superadmin','admin','konzultant','obchodnik','junior'] else 'junior' }}">{{ u.role }}</span></td>
-          <td style="font-size:11px;color:rgba(255,255,255,0.5);">
-            {% if u.role == "superadmin" %}
-              <span style="color:#00AFF0;">Vše</span>
-            {% else %}
-              {% set perm_keys = perm_map.get(u.id, []) %}
-              {% if perm_keys %}{{ perm_keys|join(", ") }}{% else %}<span style="color:rgba(255,255,255,0.25);">žádné</span>{% endif %}
-            {% endif %}
-          </td>
-          <td>
-            {% if u.is_active %}<span style="font-size:11px;color:#4ade80;font-weight:600;">Aktivní</span>
-            {% else %}<span style="font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;">Neaktivní</span>{% endif %}
-          </td>
-          <td style="text-align:right;">
-            <button class="btn btn-secondary btn-sm" onclick="openUpravit(
-              {{ u.id }},
-              '{{ u.name|replace("'", "\\'") }}',
-              '{{ u.email }}',
-              '{{ u.role }}',
-              {{ u.is_active|lower }},
-              '{{ u.freelo_email or "" }}',
-              {{ 'true' if u.freelo_api_key else 'false' }},
-              [{% for app in vsechny_apps %}{% if u.id in perm_map and app.key in perm_map[u.id] %}'{{ app.key }}'{% if not loop.last %},{% endif %}{% endif %}{% endfor %}]
-            )">Upravit</button>
-          </td>
-        </tr>
-        {% endfor %}
+        <tr class="perms-group"><td colspan="7">Klienti</td></tr>
+        {% for label,vals in [
+          ("Vidět klienty",       ["přiřazené","všechny","všechny","všechny","všechny","jen sebe"]),
+          ("Přidat / editovat",   ["ok","ok","ok","ok","ok","no"]),
+          ("Smazat klienta",      ["no","no","no","no","ok","no"]),
+        ]%}<tr><td>{{label}}</td>{% for v in vals %}<td class="{% if v in ['ok','no'] %}{{v}}{% endif %}">{% if v=="ok" %}✓{% elif v=="no" %}—{% else %}<span class="txt">{{v}}</span>{% endif %}</td>{% endfor %}</tr>{% endfor %}
+
+        <tr class="perms-group"><td colspan="7">Nabídky</td></tr>
+        {% for label,vals in [
+          ("Vytvořit nabídku",    ["no","no","ok","ok","ok","no"]),
+          ("Číst nabídky",        ["no","no","ok","ok","ok","ok"]),
+        ]%}<tr><td>{{label}}</td>{% for v in vals %}<td class="{% if v in ['ok','no'] %}{{v}}{% endif %}">{% if v=="ok" %}✓{% elif v=="no" %}—{% else %}<span class="txt">{{v}}</span>{% endif %}</td>{% endfor %}</tr>{% endfor %}
+
+        <tr class="perms-group"><td colspan="7">Freelo &amp; Systém</td></tr>
+        {% for label,vals in [
+          ("Odeslat do Freela",   ["no","ok","no","ok","ok","no"]),
+          ("Nastavit Freelo",     ["no","no","no","ok","ok","no"]),
+          ("Správa uživatelů",    ["no","no","no","no","ok","no"]),
+          ("Editace AI šablon",   ["no","no","no","no","ok","no"]),
+          ("Klientský portál",    ["no","no","no","no","no","ok"]),
+        ]%}<tr><td>{{label}}</td>{% for v in vals %}<td class="{% if v in ['ok','no'] %}{{v}}{% endif %}">{% if v=="ok" %}✓{% elif v=="no" %}—{% else %}<span class="txt">{{v}}</span>{% endif %}</td>{% endfor %}</tr>{% endfor %}
       </tbody>
     </table>
   </div>
 </div>
 
-<!-- MODAL: Přidat uživatele -->
+</div><!-- /wrap -->
+
+<!-- MODAL: Přidat -->
 <div id="modal-pridat" class="modal-overlay">
-  <div class="modal-box">
+  <div class="modal">
     <div class="modal-title">Přidat uživatele</div>
     <form method="POST" action="{{ url_for('main.novy_uzivatel') }}">
-      <div class="form-grid">
-        <div class="form-field">
-          <label>Jméno *</label>
-          <input type="text" name="name" placeholder="Jan Novák" required>
-        </div>
-        <div class="form-field">
-          <label>E-mail *</label>
-          <input type="email" name="email" placeholder="jan@commarec.cz" required>
-        </div>
-        <div class="form-field full">
-          <label>Role *</label>
-          <select name="role" id="new-role" onchange="updateRoleDesc('new')">
-            <option value="konzultant">🟢 Konzultant</option>
-            <option value="junior">🟠 Junior</option>
-            <option value="obchodnik">🔵 Obchodník</option>
-            <option value="admin">⚡ Admin</option>
-            <option value="superadmin">👑 Superadmin</option>
-          </select>
-        </div>
-        <div class="form-field full">
-          <div class="role-desc-box" id="new-role-desc"></div>
-        </div>
-        <div class="form-field full">
-          <label>Heslo *</label>
-          <input type="text" name="password" placeholder="Dočasné heslo" required>
-        </div>
+      <div class="field-row">
+        <div class="field"><label>Jméno *</label><input type="text" name="name" placeholder="Jan Novák" required></div>
+        <div class="field"><label>E-mail *</label><input type="email" name="email" placeholder="jan@commarec.cz" required></div>
       </div>
+      <div class="field">
+        <label>Role *</label>
+        <select name="role" id="new-role" onchange="roleHint('new')">
+          <option value="konzultant">🟢 Konzultant</option>
+          <option value="junior">🟠 Junior</option>
+          <option value="obchodnik">🔵 Obchodník</option>
+          <option value="admin">⚡ Admin</option>
+          <option value="superadmin">👑 Superadmin</option>
+        </select>
+      </div>
+      <div class="role-hint" id="new-hint"></div>
+      <div class="field"><label>Heslo *</label><input type="text" name="password" placeholder="Dočasné heslo" required></div>
       <div class="modal-foot">
-        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-pridat')">Zrušit</button>
-        <button type="submit" class="btn btn-primary">Přidat uživatele</button>
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-pridat')">Zrušit</button>
+        <button type="submit" class="btn btn-primary">Přidat</button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- MODAL: Upravit uživatele -->
+<!-- MODAL: Upravit -->
 <div id="modal-upravit" class="modal-overlay">
-  <div class="modal-box">
+  <div class="modal">
     <div class="modal-title">Upravit uživatele</div>
     <form method="POST" id="form-upravit">
-      <div class="form-grid">
-        <div class="form-field">
-          <label>Jméno *</label>
-          <input type="text" name="name" id="edit-name" required>
-        </div>
-        <div class="form-field">
-          <label>E-mail</label>
-          <input type="text" id="edit-email" disabled>
-        </div>
-        <div class="form-field full">
-          <label>Role</label>
-          <select name="role" id="edit-role" onchange="updateRoleDesc('edit')">
-            <option value="konzultant">🟢 Konzultant</option>
-            <option value="junior">🟠 Junior</option>
-            <option value="obchodnik">🔵 Obchodník</option>
-            <option value="admin">⚡ Admin</option>
-            <option value="superadmin">👑 Superadmin</option>
-          </select>
-        </div>
-        <div class="form-field full">
-          <div class="role-desc-box" id="edit-role-desc"></div>
-        </div>
-        <div class="form-field full">
-          <label>Nové heslo (ponech prázdné = beze změny)</label>
-          <input type="password" name="heslo_zmena" placeholder="••••••••" autocomplete="new-password">
-        </div>
+      <div class="field-row">
+        <div class="field"><label>Jméno *</label><input type="text" name="name" id="e-name" required></div>
+        <div class="field"><label>E-mail</label><input type="text" id="e-email" disabled></div>
       </div>
+      <div class="field">
+        <label>Role</label>
+        <select name="role" id="e-role" onchange="roleHint('edit')">
+          <option value="konzultant">🟢 Konzultant</option>
+          <option value="junior">🟠 Junior</option>
+          <option value="obchodnik">🔵 Obchodník</option>
+          <option value="admin">⚡ Admin</option>
+          <option value="superadmin">👑 Superadmin</option>
+        </select>
+      </div>
+      <div class="role-hint" id="edit-hint"></div>
+      <div class="field"><label>Nové heslo (prázdné = beze změny)</label><input type="password" name="heslo_zmena" placeholder="••••••••" autocomplete="new-password"></div>
 
-      <div class="sekce-label">Přístup k aplikacím</div>
-      <div class="app-checkboxy" id="edit-app-checks">
+      <div class="divider">Přístup k aplikacím</div>
+      <div class="app-checks">
         {% for app in vsechny_apps %}
-        <div class="app-check">
-          <input type="checkbox" name="app_keys" value="{{ app.key }}" id="edit-app-{{ app.key }}">
-          <label for="edit-app-{{ app.key }}">{{ app.nazev }}</label>
-        </div>
+        <label class="app-check">
+          <input type="checkbox" name="app_keys" value="{{ app.key }}" id="ea-{{ app.key }}">
+          <span>{{ app.nazev }}</span>
+        </label>
         {% endfor %}
       </div>
 
-      <div class="sekce-label">Freelo API (přepíše globální nastavení)</div>
-      <div class="form-grid" style="margin-top:0.5rem;">
-        <div class="form-field">
-          <label>Freelo e-mail</label>
-          <input type="email" name="freelo_email" id="edit-freelo-email" placeholder="vas@email.cz">
-        </div>
-        <div class="form-field">
-          <label>Freelo API klíč</label>
-          <input type="password" name="freelo_api_key" id="edit-freelo-key" placeholder="Nezadán" autocomplete="new-password">
-          <div id="edit-freelo-status" class="freelo-status" style="display:none;">✓ API klíč nastaven</div>
-        </div>
+      <div class="divider">Freelo API</div>
+      <div class="field-row">
+        <div class="field"><label>Freelo e-mail</label><input type="email" name="freelo_email" id="e-fl-email" placeholder="vas@email.cz"></div>
+        <div class="field"><label>Freelo API klíč</label><input type="password" name="freelo_api_key" id="e-fl-key" placeholder="Nezadán" autocomplete="new-password"><div id="e-fl-ok" class="freelo-ok" style="display:none;">✓ Klíč nastaven</div></div>
       </div>
 
-      <div class="sekce-label">Stav účtu</div>
-      <div style="padding: 0.5rem 0;">
-        <select name="is_active" id="edit-is-active" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:8px 12px;font-family:'Montserrat',sans-serif;font-size:13px;color:#fff;outline:none;width:100%;">
+      <div class="divider">Stav účtu</div>
+      <div class="field">
+        <select name="is_active" id="e-active">
           <option value="1">Aktivní</option>
           <option value="">Neaktivní (zablokovaný)</option>
         </select>
       </div>
 
-      <input type="hidden" name="heslo_zmena_flag" id="edit-heslo-flag" value="">
-
       <div class="modal-foot">
-        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-upravit')">Zrušit</button>
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-upravit')">Zrušit</button>
         <button type="submit" class="btn btn-primary">Uložit změny</button>
       </div>
     </form>
@@ -327,63 +281,36 @@ h2 { font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacin
 </div>
 
 <script>
-const ROLE_DESCS = {
-  konzultant: "Vytváří a edituje vlastní zápisy, odesílá úkoly do Freela, vidí všechny klienty.",
-  junior:     "Vytváří vlastní zápisy, vidí jen přiřazené klienty, neodesílá do Freela samostatně.",
-  obchodnik:  "Vytváří a spravuje nabídky, vidí všechny klienty a zápisy (jen čtení).",
-  admin:      "Správa klientů, edituje všechny zápisy i nabídky, Freelo nastavení.",
-  superadmin: "Plný přístup — správa uživatelů, editace AI šablon, mazání čehokoliv.",
+const HINTS = {
+  konzultant:"Vytváří a edituje vlastní zápisy, odesílá úkoly do Freela, vidí všechny klienty.",
+  junior:"Vytváří vlastní zápisy, vidí jen přiřazené klienty.",
+  obchodnik:"Vytváří a spravuje nabídky, vidí všechny klienty.",
+  admin:"Správa klientů, edituje všechny zápisy i nabídky, nastavení Freela.",
+  superadmin:"Plný přístup — správa uživatelů, AI šablon, mazání čehokoliv.",
 };
-
-function updateRoleDesc(prefix) {
-  const role = document.getElementById(prefix + "-role").value;
-  const desc = document.getElementById(prefix + "-role-desc");
-  if (desc) desc.textContent = ROLE_DESCS[role] || "";
-  // Superadmin - disable app checkboxes
-  if (prefix === "edit") {
-    const checks = document.getElementById("edit-app-checks");
-    if (checks) checks.style.opacity = role === "superadmin" ? "0.4" : "1";
-  }
+function roleHint(p){
+  const role = document.getElementById(p==="new"?"new-role":"e-role").value;
+  document.getElementById(p==="new"?"new-hint":"edit-hint").textContent = HINTS[role]||"";
 }
-
-function openPridat() {
-  document.getElementById("modal-pridat").classList.add("open");
-  updateRoleDesc("new");
-}
-
-function openUpravit(id, name, email, role, isActive, freeloEmail, freeloHasKey, appKeys) {
-  document.getElementById("edit-name").value = name;
-  document.getElementById("edit-email").value = email;
-  document.getElementById("edit-role").value = role;
-  document.getElementById("edit-is-active").value = isActive ? "1" : "";
-  document.getElementById("edit-freelo-email").value = freeloEmail || "";
-  document.getElementById("edit-freelo-key").placeholder = freeloHasKey ? "••••••••" : "Nezadán";
-  document.getElementById("edit-freelo-status").style.display = freeloHasKey ? "block" : "none";
-  document.getElementById("form-upravit").action = "/admin/uzivatel/" + id + "/opravneni";
-
-  // App checkboxes
-  document.querySelectorAll("[id^=edit-app-]").forEach(cb => {
-    cb.checked = appKeys.includes(cb.value);
-  });
-
-  updateRoleDesc("edit");
+function openPridat(){ document.getElementById("modal-pridat").classList.add("open"); roleHint("new"); }
+function openUpravit(id,name,email,role,active,flEmail,flKey,apps){
+  document.getElementById("e-name").value=name;
+  document.getElementById("e-email").value=email;
+  document.getElementById("e-role").value=role;
+  document.getElementById("e-active").value=active?"1":"";
+  document.getElementById("e-fl-email").value=flEmail||"";
+  document.getElementById("e-fl-key").placeholder=flKey?"•••••••• (nastaven)":"Nezadán";
+  document.getElementById("e-fl-ok").style.display=flKey?"block":"none";
+  document.getElementById("form-upravit").action="/admin/uzivatel/"+id+"/opravneni";
+  document.querySelectorAll("[id^=ea-]").forEach(cb=>{ cb.checked=apps.includes(cb.value); });
+  roleHint("edit");
   document.getElementById("modal-upravit").classList.add("open");
 }
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove("open");
-}
-
-// Zavři kliknutím mimo modal
-document.addEventListener("click", e => {
-  ["modal-pridat", "modal-upravit"].forEach(id => {
-    if (e.target === document.getElementById(id))
-      document.getElementById(id).classList.remove("open");
-  });
+function closeModal(id){ document.getElementById(id).classList.remove("open"); }
+document.addEventListener("click",e=>{
+  ["modal-pridat","modal-upravit"].forEach(id=>{ if(e.target===document.getElementById(id)) closeModal(id); });
 });
-
-// Init
-updateRoleDesc("new");
+roleHint("new");
 </script>
 </body>
 </html>
