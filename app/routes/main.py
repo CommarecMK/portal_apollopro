@@ -141,17 +141,24 @@ def admin():
 @bp.route("/admin/uzivatel/<int:user_id>/opravneni", methods=["POST"])
 @admin_required
 def uzivatel_opravneni(user_id):
-    """Uloží oprávnění aplikací pro uživatele."""
+    """Uloží oprávnění aplikací a roli pro uživatele."""
     user = User.query.get_or_404(user_id)
     vybrane_keys = request.form.getlist("app_keys")
+    nova_role = request.form.get("role", user.role)
+
+    # Ulož roli (superadmin nemůže měnit sám sobě roli)
+    if user.id != session["user_id"]:
+        user.role = nova_role
+        user.is_admin = nova_role in ("admin", "superadmin")
 
     # Smaž stará oprávnění
     PortalAppPermission.query.filter_by(user_id=user_id).delete()
 
-    # Ulož nová
-    for key in vybrane_keys:
-        if any(a["key"] == key for a in ALL_APPS):
-            db.session.add(PortalAppPermission(user_id=user_id, app_key=key))
+    # Ulož nová (superadmin má vše automaticky, checkboxy se ignorují)
+    if nova_role != "superadmin":
+        for key in vybrane_keys:
+            if any(a["key"] == key for a in ALL_APPS):
+                db.session.add(PortalAppPermission(user_id=user_id, app_key=key))
 
     db.session.commit()
     return redirect(url_for("main.admin"))

@@ -12,17 +12,31 @@ body { font-family: 'Montserrat', sans-serif; min-height: 100vh; background: #0E
 .bg { position: fixed; inset: 0; background: #0E213E; z-index: 0; }
 .bg-orb { position: absolute; border-radius: 50%; filter: blur(80px); }
 .bg-orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(23,55,103,0.9) 0%, transparent 70%); top: -200px; left: -150px; }
-.obsah { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; padding: 2rem; }
+.obsah { position: relative; z-index: 10; max-width: 1100px; margin: 0 auto; padding: 2rem; }
 .nav { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
 .nav-logo { font-size: 13px; font-weight: 900; color: #00AFF0; letter-spacing: 0.15em; text-transform: uppercase; }
 .nav-sep { color: rgba(255,255,255,0.2); }
 .nav-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 0.05em; text-transform: uppercase; }
 .nav-back { margin-left: auto; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; }
 .nav-back:hover { color: #00AFF0; }
-h2 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; margin-bottom: 1rem; }
+h2 { font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; margin-bottom: 1rem; }
 .sekce { margin-bottom: 2.5rem; }
+
+/* Role info box */
+.role-info { background: rgba(0,175,240,0.06); border: 1px solid rgba(0,175,240,0.15); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+.role-info h3 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #00AFF0; margin-bottom: 1rem; }
+.role-tabulka { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; }
+.role-polozka { }
+.role-nazev { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+.role-popis { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.5; font-weight: 500; }
+.r-superadmin { color: #00AFF0; }
+.r-admin { color: #c084fc; }
+.r-konzultant { color: #4ade80; }
+.r-obchodnik { color: #fbbf24; }
+.r-junior { color: rgba(255,255,255,0.6); }
+
 /* Nový uživatel */
-.nova-forma { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 0.75rem; align-items: end; }
+.nova-forma { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.5rem; display: grid; grid-template-columns: 1.2fr 1.5fr 1.2fr 1fr auto; gap: 0.75rem; align-items: end; }
 .pole label { display: block; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
 .pole input, .pole select { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 5px; padding: 9px 12px; font-family: 'Montserrat', sans-serif; font-size: 12px; color: #fff; outline: none; }
 .pole input:focus, .pole select:focus { border-color: #00AFF0; }
@@ -30,35 +44,72 @@ h2 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spac
 .btn { padding: 9px 18px; border: none; border-radius: 5px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
 .btn-primary { background: #00AFF0; color: #0E213E; }
 .btn-primary:hover { background: #008ABD; }
-.btn-sm { padding: 5px 12px; font-size: 10px; }
-.btn-danger { background: rgba(192,57,43,0.3); color: #ff8a7a; border: 1px solid rgba(192,57,43,0.3); }
-.btn-success { background: rgba(34,197,94,0.2); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
-/* Tabulka uživatelů */
+.btn-sm { padding: 6px 14px; font-size: 10px; }
+.btn-danger { background: rgba(192,57,43,0.25); color: #ff8a7a; border: 1px solid rgba(192,57,43,0.3); }
+.btn-success { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+
+/* Tabulka */
 .tabulka { width: 100%; border-collapse: collapse; }
-.tabulka th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); padding: 0.6rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; }
-.tabulka td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; vertical-align: middle; }
+.tabulka th { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); padding: 0.6rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; }
+.tabulka td { padding: 0.9rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; vertical-align: middle; }
 .tabulka tr:hover td { background: rgba(255,255,255,0.02); }
-.role-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-.role-superadmin { background: rgba(0,175,240,0.2); color: #00AFF0; }
-.role-admin { background: rgba(168,85,247,0.2); color: #c084fc; }
-.role-other { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
-.neaktivni td { opacity: 0.45; }
-/* Aplikace checkboxy */
-.app-checkboxy { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.neaktivni td { opacity: 0.4; }
+
+/* Role select v řádku */
+.role-select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 5px 8px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: #fff; outline: none; cursor: pointer; }
+.role-select:focus { border-color: #00AFF0; }
+.role-select option { background: #0E213E; }
+
+/* Badge */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.badge-superadmin { background: rgba(0,175,240,0.2); color: #00AFF0; }
+
+/* App checkboxy */
+.app-checkboxy { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
 .app-check { display: flex; align-items: center; gap: 5px; }
 .app-check input[type=checkbox] { accent-color: #00AFF0; width: 14px; height: 14px; cursor: pointer; }
-.app-check label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7); cursor: pointer; white-space: nowrap; }
-.ulozit-btn { margin-left: 0.5rem; }
+.app-check label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.65); cursor: pointer; white-space: nowrap; }
+
+/* Řádkový formulář */
+.radkovy-form { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
 </style>
 </head>
 <body>
 <div class="bg"><div class="bg-orb bg-orb-1"></div></div>
 <div class="obsah">
+
   <div class="nav">
     <div class="nav-logo">Apollo Pro</div>
     <div class="nav-sep">·</div>
     <div class="nav-title">Správa uživatelů</div>
     <a href="{{ url_for('main.portal') }}" class="nav-back">← Zpět na portál</a>
+  </div>
+
+  <!-- Přehled rolí -->
+  <div class="role-info">
+    <h3>Přehled rolí — co kdo smí v CRM</h3>
+    <div class="role-tabulka">
+      <div class="role-polozka">
+        <div class="role-nazev r-superadmin">Superadmin</div>
+        <div class="role-popis">Vše — správa uživatelů, šablon, všechny funkce bez omezení</div>
+      </div>
+      <div class="role-polozka">
+        <div class="role-nazev r-admin">Admin</div>
+        <div class="role-popis">Editace zápisů všech, správa klientů, nabídky, Freelo, reporty</div>
+      </div>
+      <div class="role-polozka">
+        <div class="role-nazev r-konzultant">Konzultant</div>
+        <div class="role-popis">Vlastní zápisy, správa klientů, odesílání do Freelo</div>
+      </div>
+      <div class="role-polozka">
+        <div class="role-nazev r-obchodnik">Obchodník</div>
+        <div class="role-popis">Nabídky, přehled klientů — bez zápisů ze schůzek</div>
+      </div>
+      <div class="role-polozka">
+        <div class="role-nazev r-junior">Junior</div>
+        <div class="role-popis">Jen vlastní zápisy, přidělení klienti — omezený přístup</div>
+      </div>
+    </div>
   </div>
 
   <!-- Nový uživatel -->
@@ -93,7 +144,7 @@ h2 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spac
     </form>
   </div>
 
-  <!-- Seznam uživatelů -->
+  <!-- Uživatelé -->
   <div class="sekce">
     <h2>Uživatelé a přístupy</h2>
     <table class="tabulka">
@@ -103,6 +154,7 @@ h2 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spac
           <th>E-mail</th>
           <th>Role</th>
           <th>Přístup k aplikacím</th>
+          <th>Uložit</th>
           <th>Stav</th>
         </tr>
       </thead>
@@ -110,34 +162,50 @@ h2 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spac
         {% for u in uzivatele %}
         <tr class="{{ 'neaktivni' if not u.is_active else '' }}">
           <td><strong>{{ u.name }}</strong></td>
-          <td style="color: rgba(255,255,255,0.5); font-size: 12px;">{{ u.email }}</td>
+          <td style="color: rgba(255,255,255,0.45); font-size: 12px;">{{ u.email }}</td>
           <td>
-            <span class="role-badge {{ 'role-superadmin' if u.role == 'superadmin' else ('role-admin' if u.role == 'admin' else 'role-other') }}">
-              {{ u.role }}
-            </span>
+            {% if u.id == current_user.id %}
+              <span class="badge badge-superadmin">{{ u.role }}</span>
+            {% else %}
+            <form method="POST" action="{{ url_for('main.uzivatel_opravneni', user_id=u.id) }}" id="form_{{ u.id }}">
+              <select name="role" class="role-select" onchange="">
+                <option value="junior" {{ 'selected' if u.role == 'junior' else '' }}>Junior</option>
+                <option value="konzultant" {{ 'selected' if u.role == 'konzultant' else '' }}>Konzultant</option>
+                <option value="obchodnik" {{ 'selected' if u.role == 'obchodnik' else '' }}>Obchodník</option>
+                <option value="admin" {{ 'selected' if u.role == 'admin' else '' }}>Admin</option>
+                <option value="superadmin" {{ 'selected' if u.role == 'superadmin' else '' }}>Superadmin</option>
+              </select>
+            {% endif %}
           </td>
           <td>
-            {% if u.role == "superadmin" %}
+            {% if u.id == current_user.id %}
               <span style="font-size: 11px; color: #00AFF0; font-weight: 600;">Vše automaticky</span>
+            {% elif u.role == "superadmin" %}
+              <span style="font-size: 11px; color: #00AFF0; font-weight: 600;">Vše automaticky</span>
+              <input type="hidden" name="role" value="superadmin">
             {% else %}
-              <form method="POST" action="{{ url_for('main.uzivatel_opravneni', user_id=u.id) }}" style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-                <div class="app-checkboxy">
-                  {% for app in vsechny_apps %}
-                  <div class="app-check">
-                    <input type="checkbox" name="app_keys" value="{{ app.key }}"
-                      id="app_{{ u.id }}_{{ app.key }}"
-                      {{ 'checked' if u.id in perm_map and app.key in perm_map[u.id] else '' }}>
-                    <label for="app_{{ u.id }}_{{ app.key }}">{{ app.nazev }}</label>
-                  </div>
-                  {% endfor %}
+              <div class="app-checkboxy">
+                {% for app in vsechny_apps %}
+                <div class="app-check">
+                  <input type="checkbox" name="app_keys" value="{{ app.key }}"
+                    id="app_{{ u.id }}_{{ app.key }}"
+                    {{ 'checked' if u.id in perm_map and app.key in perm_map[u.id] else '' }}>
+                  <label for="app_{{ u.id }}_{{ app.key }}">{{ app.nazev }}</label>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm ulozit-btn">Uložit</button>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </td>
+          <td>
+            {% if u.id != current_user.id %}
+              <button type="submit" form="form_{{ u.id }}" class="btn btn-primary btn-sm">Uložit</button>
               </form>
             {% endif %}
           </td>
           <td>
             <form method="POST" action="{{ url_for('main.uzivatel_aktivovat', user_id=u.id) }}">
-              <button type="submit" class="btn btn-sm {{ 'btn-danger' if u.is_active else 'btn-success' }}">
+              <button type="submit" class="btn btn-sm {{ 'btn-danger' if u.is_active else 'btn-success' }}"
+                {{ 'disabled' if u.id == current_user.id else '' }}>
                 {{ 'Deaktivovat' if u.is_active else 'Aktivovat' }}
               </button>
             </form>
