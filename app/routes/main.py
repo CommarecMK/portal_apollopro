@@ -28,16 +28,57 @@ ALL_APPS = [
         "url_env": "KB_URL",
         "url_default": "https://brain.apollopro.io",
     },
-    # Přidej sem další aplikace:
-    # {
-    #     "key": "nova",
-    #     "nazev": "Nová aplikace",
-    #     "popis": "Popis funkce",
-    #     "ikona": "nova",
-    #     "barva": "#f97316",
-    #     "url_env": "NOVA_URL",
-    #     "url_default": "https://nova.apollopro.io",
-    # },
+    # ── Připravované aplikace (soon) ──────────────────────────────────
+    {
+        "key": "skladove_pozice",
+        "nazev": "Generátor skladových pozic",
+        "popis": "Automatické generování a správa pozic ve skladu",
+        "ikona": "warehouse",
+        "barva": "#f97316",
+        "url_env": "SKLAD_URL",
+        "url_default": "#",
+        "soon": True,
+    },
+    {
+        "key": "nabidky",
+        "nazev": "Nabídky pro klienty",
+        "popis": "Tvorba, správa a odesílání obchodních nabídek",
+        "ikona": "offer",
+        "barva": "#a855f7",
+        "url_env": "NABIDKY_URL",
+        "url_default": "#",
+        "soon": True,
+    },
+    {
+        "key": "equipment",
+        "nazev": "List of Equipment",
+        "popis": "Evidence strojů, nástrojů a vybavení",
+        "ikona": "equipment",
+        "barva": "#eab308",
+        "url_env": "EQUIPMENT_URL",
+        "url_default": "#",
+        "soon": True,
+    },
+    {
+        "key": "planovani",
+        "nazev": "Plánování zaměstnanců",
+        "popis": "Směny, brigádníci, docházka a kapacitní plánování",
+        "ikona": "schedule",
+        "barva": "#06b6d4",
+        "url_env": "PLANOVANI_URL",
+        "url_default": "#",
+        "soon": True,
+    },
+    {
+        "key": "faktury_dopravci",
+        "nazev": "Kontrola faktur dopravců",
+        "popis": "Párování a validace faktur od přepravních partnerů",
+        "ikona": "invoice",
+        "barva": "#ec4899",
+        "url_env": "FAKTURY_URL",
+        "url_default": "#",
+        "soon": True,
+    },
 ]
 
 
@@ -52,6 +93,10 @@ def get_user_apps(user):
     token = vytvor_token(user.id, user.name, user.role)
     result = []
     for app_def in ALL_APPS:
+        # "Soon" aplikace vidí všichni — jen nejsou klikatelné
+        if app_def.get("soon"):
+            result.append({**app_def, "url": "#"})
+            continue
         if app_def["key"] not in app_keys:
             continue
         base_url = os.environ.get(app_def["url_env"], app_def["url_default"])
