@@ -30,6 +30,16 @@ ALL_APPS = [
         "cesta": "/operativa",
     },
     {
+        "key": "admin",
+        "nazev": "Administrace",
+        "popis": "Uživatelé, role, firmy, datová napojení",
+        "ikona": "crm",
+        "barva": "#FFCC00",
+        "url_env": "CRM_URL",
+        "url_default": "https://crm.apollopro.io",
+        "cesta": "/admin",
+    },
+    {
         "key": "brain",
         "nazev": "Brain",
         "popis": "Znalostní databáze, dokumenty, AI analýzy",
