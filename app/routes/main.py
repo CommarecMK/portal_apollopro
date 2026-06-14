@@ -12,12 +12,22 @@ bp = Blueprint("main", __name__)
 ALL_APPS = [
     {
         "key": "crm",
-        "nazev": "Zápisy (CRM)",
-        "popis": "Klienti, projekty, zápisy, nabídky",
+        "nazev": "Řízení & finance",
+        "popis": "Přehled, stav zakázek, cashflow, projektoví manažeři",
+        "ikona": "crm",
+        "barva": "#173767",
+        "url_env": "CRM_URL",
+        "url_default": "https://crm.apollopro.io",
+    },
+    {
+        "key": "operativa",
+        "nazev": "Operativa",
+        "popis": "Klienti: úkoly (Freelo), dokumenty, zápisy, LOE",
         "ikona": "crm",
         "barva": "#00AFF0",
         "url_env": "CRM_URL",
         "url_default": "https://crm.apollopro.io",
+        "cesta": "/operativa",
     },
     {
         "key": "brain",
@@ -67,10 +77,10 @@ def get_user_apps(user):
         if app_def["key"] not in app_keys:
             continue
         base_url = os.environ.get(app_def["url_env"], app_def["url_default"])
-        result.append({
-            **app_def,
-            "url": f"{base_url}/auth?token={token}",
-        })
+        url = f"{base_url}/auth?token={token}"
+        if app_def.get("cesta"):
+            url += f"&next={app_def['cesta']}"
+        result.append({**app_def, "url": url})
     return result
 
 
