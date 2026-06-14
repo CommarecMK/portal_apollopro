@@ -6,9 +6,10 @@ SSO_SECRET = os.environ.get("SSO_SECRET", "ZMENTE-TOTO-NA-RAILWAY")
 TOKEN_PLATNOST = 120
 
 
-def vytvor_token(user_id, user_name, user_role):
+def vytvor_token(user_id, user_name, user_role, user_email=None):
     s = URLSafeTimedSerializer(SSO_SECRET)
-    return s.dumps({"id": user_id, "name": user_name, "role": user_role}, salt="sso-prechod")
+    return s.dumps({"id": user_id, "name": user_name, "role": user_role,
+                    "email": user_email}, salt="sso-prechod")
 
 
 def over_token(token):

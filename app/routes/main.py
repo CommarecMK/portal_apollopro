@@ -77,7 +77,7 @@ def get_user_apps(user):
         perms = PortalAppPermission.query.filter_by(user_id=user.id).all()
         app_keys = [p.app_key for p in perms]
 
-    token = vytvor_token(user.id, user.name, user.role)
+    token = vytvor_token(user.id, user.name, user.role, user.email)
     result = []
     for app_def in ALL_APPS:
         # "Soon" aplikace vidí všichni — jen nejsou klikatelné
